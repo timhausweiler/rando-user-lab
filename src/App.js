@@ -1,25 +1,25 @@
-import logo from './logo.svg';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import UserSummary from "./UserSummary";
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  const[currentUser, setCurrentUser] = useState(null)
 
-export default App;
+  useEffect(() => {
+    const userURL = "https://api.randomuser.me/";
+    const makeApiCall = async () => {
+      const res = await axios.get(userURL);
+      setCurrentUser(res.data.results[0]);
+    };
+    makeApiCall();
+  }, [])
+
+  return (
+    <div>
+      <UserSummary userData={currentUser} />
+    </div>
+  )
+  }
+
+export default App
