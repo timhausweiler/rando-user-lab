@@ -7,9 +7,9 @@ function App() {
   const[currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
-    const userURL = "https://api.randomuser.me/";
+    const apiUrl = "https://api.randomuser.me/";
     const makeApiCall = async () => {
-      const res = await axios.get(userURL);
+      const res = await axios.get(apiUrl);
       setCurrentUser(res.data.results[0]);
     };
     makeApiCall();
@@ -17,9 +17,10 @@ function App() {
 
   return (
     <div>
-      <UserSummary userData={currentUser} />
+      <UserSummary userData={currentUser}/>
     </div>
-  )
+  );
+
   }
 
 export default App
